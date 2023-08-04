@@ -20,8 +20,6 @@ const FormularioNoticia = () => {
 
       const noticias = await respuesta.json();
 
-      console.log(noticias.results[0]);
-
       if (noticias.results[0] !== undefined) {
         setListaNoticia([...listaNoticias, await noticias.results[0]]);
       } else {
@@ -29,9 +27,6 @@ const FormularioNoticia = () => {
           "no se encontraron noticias, pruebe intentar en otra categoria o pais"
         );
       }
-
-      console.log(listaNoticias);
-      console.log(link);
     } catch (error) {
       console.log(error);
     }
