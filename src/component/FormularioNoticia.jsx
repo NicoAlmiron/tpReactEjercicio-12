@@ -15,13 +15,23 @@ const FormularioNoticia = () => {
     try {
       const categorias =
         "https://newsdata.io/api/1/news?apikey=pub_26951a1e34a6e654eea667e0cbda989db6e59";
-      const linkCategorias =
-        categorias + "&category=" + category + "&country=" + country;
-      const respuesta = await fetch(linkCategorias);
+      const link = categorias + "&category=" + category + "&country=" + country;
+      const respuesta = await fetch(link);
 
       const noticias = await respuesta.json();
-      setListaNoticia([...listaNoticias, noticias.results[0]]);
-      console.log(linkCategorias);
+
+      console.log(noticias.results[0]);
+
+      if (noticias.results[0] !== undefined) {
+        setListaNoticia([...listaNoticias, await noticias.results[0]]);
+      } else {
+        alert(
+          "no se encontraron noticias, pruebe intentar en otra categoria o pais"
+        );
+      }
+
+      console.log(listaNoticias);
+      console.log(link);
     } catch (error) {
       console.log(error);
     }
